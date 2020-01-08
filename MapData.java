@@ -7,11 +7,13 @@ public class MapData {
   public static final int TYPE_WALL   = 1;
   public static final int TYPE_ITEM = 2;
   public static final int TYPE_GOAL = 3;
+  public static final int TYPE_BLACK = 4;
   private static final String mapImageFiles[] = {
     "png/SPACE.png",
     "png/WALL.png",
     "png/ITEM.png",   //　追加
     "png/GOAL.png",
+    "png/black.png",//黒塗り画像
   };
 
   private Image[] mapImages;
