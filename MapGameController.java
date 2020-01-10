@@ -59,9 +59,10 @@ public class MapGameController implements Initializable {
 
 
     public void mapPrint(MoveChara c, MapData m){
-        imageRestore();
         int cx = c.getPosX();
         int cy = c.getPosY();
+        removeBlack(cx,cy,m);
+        imageRestore();
         mapGrid.getChildren().clear();
         for(int y=0; y<mapData.getHeight(); y++){
             for(int x=0; x<mapData.getWidth(); x++){
@@ -73,6 +74,19 @@ public class MapGameController implements Initializable {
                 }
             }
         }
+    }
+
+    public void removeBlack(int cx,int cy,MapData m){
+      for(int dy=-1;dy<=1;dy++){
+        for(int dx=-1;dx<=1;dx++){
+          try{
+            m.setBlackOut(cx+dx,cy+dy);
+          }catch(Exception e){
+            continue;
+          }
+        }
+      }
+      m.setImageViews();
     }
 
     public void func1ButtonAction(ActionEvent event) { }
