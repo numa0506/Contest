@@ -19,26 +19,32 @@ public class MapData {
   private Image[] mapImages;
   private ImageView[][] mapImageViews;
   private int[][] maps;
+  private boolean[][] blackOut;//黒塗り判定用配列
   private int width;
   private int height;
   private int [][] itemList = new int[NUMBER][2];  //アイテムの座標をx軸y軸に分けて保存する配列
   private boolean[] itemFlag  = new boolean[NUMBER]; //アイテムの回収の有無を保存する配列
 
   MapData(int x, int y){
-    mapImages     = new Image[4];
+    mapImages     = new Image[5];
     mapImageViews = new ImageView[y][x];
-    for (int i=0; i<4; i++) {
+    for (int i=0; i<5; i++) {
       mapImages[i] = new Image(mapImageFiles[i]);
     }
 
     width  = x;
     height = y;
     maps = new int[y][x];
+    blackOut = new boolean[y][x];
 
     fillMap(MapData.TYPE_WALL);
     digMap(1, 3);
     putItem();   //追加
     putGoal();
+    for(int i=0;i<NUMBER;i++){
+      blackOut[itemList[i][1]][itemList[i][0]]=true;
+    }
+    blackOut[13][19]=true;
     setImageViews();
   }
   public boolean getItemFlag(int i){
@@ -112,9 +118,17 @@ public class MapData {
   public void setImageViews() {
     for (int y=0; y<height; y++) {
       for (int x=0; x<width; x++) {
+        if(blackOut[y][x] == false){
+          mapImageViews[y][x] = new ImageView(mapImages[TYPE_BLACK]);
+          continue;
+        }
         mapImageViews[y][x] = new ImageView(mapImages[maps[y][x]]);
       }
     }
+  }
+
+  public void setBlackOut(int x,int y){
+    blackOut[y][x]=true;
   }
 
   public void fillMap(int type){
