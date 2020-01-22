@@ -9,12 +9,26 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.Group;
+import javafx.stage.Window;
+import java.io.IOException;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.scene.Parent;
+import javafx.scene.Node;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.event.Event;
 
 public class MapGameController implements Initializable {
+
+
+
     public MapData mapData;
     public MoveChara chara;
     public GridPane mapGrid;
     public ImageView[] mapImageViews;
+    public static int score = 100;
 //    public Group[] mapGroups;
 
     @Override
@@ -109,6 +123,7 @@ public class MapGameController implements Initializable {
         }
     }
 
+
     public void outputAction(String actionString) {
         System.out.println("Select Action: " + actionString);
     }
@@ -118,7 +133,14 @@ public class MapGameController implements Initializable {
         chara.setCharaDir(MoveChara.TYPE_DOWN);
         chara.move(0, 1);
         mapPrint(chara, mapData);
-        resetMapIfGoal();//if it is Goal =>restart map
+        //resetMapIfGoal();//if it is Goal =>restart map
+
+        if(chara.getPosX()==19 && chara.getPosY()==13){
+            MapGame.getInstance().resultShow();
+        mapPrint(chara, mapData);
+        score--;
+        chara.goal();
+      }
 
     }
     public void downButtonAction(ActionEvent event) {
@@ -130,7 +152,14 @@ public class MapGameController implements Initializable {
         chara.setCharaDir(MoveChara.TYPE_RIGHT);
         chara.move( 1, 0);
         mapPrint(chara, mapData);
-        resetMapIfGoal();//if it is Goal =>restart map
+        //resetMapIfGoal();//if it is Goal =>restart map
+
+        if(chara.getPosX()==19 && chara.getPosY()==13){
+            MapGame.getInstance().resultShow();
+        mapPrint(chara, mapData);
+        score--;
+        chara.goal();
+      }
 
     }
     public void rightButtonAction(ActionEvent event) {
@@ -142,7 +171,14 @@ public class MapGameController implements Initializable {
         chara.setCharaDir(MoveChara.TYPE_LEFT);
         chara.move( -1, 0);
         mapPrint(chara, mapData);
-        resetMapIfGoal();//if it is Goal =>restart map
+        //resetMapIfGoal();//if it is Goal =>restart map
+
+        if(chara.getPosX()==19 && chara.getPosY()==13){
+            MapGame.getInstance().resultShow();
+        mapPrint(chara, mapData);
+        score--;
+        chara.goal();
+      }
     }
     public void leftButtonAction(ActionEvent event) {
         leftButtonAction();
@@ -153,12 +189,17 @@ public class MapGameController implements Initializable {
         chara.setCharaDir(MoveChara.TYPE_UP);
         chara.move( 0, -1);
         mapPrint(chara, mapData);
-        resetMapIfGoal();//if it is Goal =>restart map
+        //resetMapIfGoal();//if it is Goal =>restart map
+
+        if(chara.getPosX()==19 && chara.getPosY()==13){
+            MapGame.getInstance().resultShow();
+        mapPrint(chara, mapData);
+        score--;
+        chara.goal();
+      }
     }
     public void upButtonAction(ActionEvent event) {
         upButtonAction();
     }
-
-
 
 }
