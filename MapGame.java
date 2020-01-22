@@ -58,9 +58,9 @@ public class MapGame extends Application {
     }
 
   public static void main(String[] args)throws Exception{
-    /*AudioClip bgm = new AudioClip(new File("sound/loop3.wav").toURI().toString());
+    AudioClip bgm = new AudioClip(new File("sound/loop3.wav").toURI().toString());
     bgm.setCycleCount(AudioClip.INDEFINITE);
-    bgm.play();*/
+    bgm.play();
     launch(args);
   }
 }
