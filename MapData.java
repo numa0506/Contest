@@ -7,44 +7,40 @@ public class MapData {
   public static final int TYPE_WALL   = 1;
   public static final int TYPE_ITEM = 2;
   public static final int TYPE_GOAL = 3;
-  public static final int TYPE_BLACK = 4;
-  private static final String mapImageFiles[] = {
+  //public static final int TYPE_BLACK = 4;
+  public static final String mapImageFiles[] = {
     "png/SPACE.png",
     "png/WALL.png",
     "png/ITEM.png",   //　追加
     "png/GOAL.png",
     "png/black.png",//黒塗り画像
+    "png/FIRE.png",
   };
 
-  private Image[] mapImages;
-  private ImageView[][] mapImageViews;
-  private int[][] maps;
-  private boolean[][] blackOut;//黒塗り判定用配列
-  private int width;
-  private int height;
-  private int [][] itemList = new int[NUMBER][2];  //アイテムの座標をx軸y軸に分けて保存する配列
-  private boolean[] itemFlag  = new boolean[NUMBER]; //アイテムの回収の有無を保存する配列
+  public Image[] mapImages;
+  public ImageView[][] mapImageViews;
+  public int[][] maps;
+  public  boolean[][] blackOut;//黒塗り判定用配列
+  public int width;
+  public int height;
+  public int [][] itemList = new int[NUMBER][2];  //アイテムの座標をx軸y軸に分けて保存する配列
+  public boolean[] itemFlag  = new boolean[NUMBER]; //アイテムの回収の有無を保存する配列
 
   MapData(int x, int y){
-    mapImages     = new Image[5];
+    mapImages     = new Image[10];//適当な値です
     mapImageViews = new ImageView[y][x];
-    for (int i=0; i<5; i++) {
+    for (int i=0; i<4; i++) {
       mapImages[i] = new Image(mapImageFiles[i]);
     }
 
     width  = x;
     height = y;
     maps = new int[y][x];
-    blackOut = new boolean[y][x];
 
     fillMap(MapData.TYPE_WALL);
     digMap(1, 3);
     putItem();   //追加
     putGoal();
-    for(int i=0;i<NUMBER;i++){
-      blackOut[itemList[i][1]][itemList[i][0]]=true;
-    }
-    blackOut[13][19]=true;
     setImageViews();
   }
   public boolean getItemFlag(int i){
@@ -118,18 +114,13 @@ public class MapData {
   public void setImageViews() {
     for (int y=0; y<height; y++) {
       for (int x=0; x<width; x++) {
-        if(blackOut[y][x] == false){
-          mapImageViews[y][x] = new ImageView(mapImages[TYPE_BLACK]);
-          continue;
-        }
         mapImageViews[y][x] = new ImageView(mapImages[maps[y][x]]);
       }
     }
   }
 
-  public void setBlackOut(int x,int y){
-    blackOut[y][x]=true;
-  }
+  public void setBlackOut(int x,int y){}//うまくできたら最終的にはabstractに
+
 
   public void fillMap(int type){
     for (int y=0; y<height; y++){

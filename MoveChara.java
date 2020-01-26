@@ -82,7 +82,12 @@ public class MoveChara {
   public boolean canMove(int dx, int dy){     //壁じゃなかったら正を返すように修正
     if (mapData.getMap(posX+dx, posY+dy) == MapData.TYPE_WALL){
       return false;
-    } else{
+    } else if(mapData.getMap(posX+dx, posY+dy) == 5){
+      posX = 1;
+      posY = 1;
+      setCharaDir(TYPE_DOWN);
+      return false;
+    }else{
       return true;
     }
   }
