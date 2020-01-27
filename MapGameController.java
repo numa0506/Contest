@@ -21,9 +21,6 @@ import javafx.scene.control.Button;
 import javafx.event.Event;
 
 public class MapGameController implements Initializable {
-
-
-
     public MapData mapData;
     public MoveChara chara;
     public GridPane mapGrid;
