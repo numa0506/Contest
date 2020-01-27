@@ -2,7 +2,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 import javafx.animation.AnimationTimer;
-
+/**
+*@author Wada,Naganuma*2,Pham,Terada,Seta
+*@version 1.0
+*/
 public class MoveChara {
   public static final int TYPE_DOWN  = 0;
   public static final int TYPE_LEFT  = 1;
@@ -48,7 +51,10 @@ public class MoveChara {
 
     setCharaDir(TYPE_DOWN);
   }
-
+  /**
+  *@param なし
+  *@return なし
+  */
   public void changeCount(){
     count = count + diffx;
     if (count > 2) {
@@ -59,15 +65,24 @@ public class MoveChara {
       diffx = 1;
     }
   }
-
+  /**
+  *@param getPosXは今いる現在座標
+  *@return 現在のx座標を返します
+  */
   public int getPosX(){
     return posX;
   }
-
+  /**
+  *@param getPosYは今いる現在座標
+  *@return 現在のy座標を返します
+  */
   public int getPosY(){
     return posY;
   }
-
+  /**
+  *@param cdは移動しているか、止まっているかの判定に使用される
+  *@return 4方向のいずれかになったらそのアニメを返す、止まっている場合は止まっているアニメを返す
+  */
   public void setCharaDir(int cd){
     charaDir = cd;
     for (int i=0; i<4; i++) {
@@ -78,34 +93,46 @@ public class MoveChara {
       }
     }
   }
-
-  public boolean canMove(int dx, int dy){     //壁じゃなかったら正を返すように修正
+  /**
+  *@param dx,dyは移動する量
+  *@return 座標+移動量が壁であったら正を返す、そうでなければ負を返す
+  */
+  public boolean canMove(int dx, int dy){
     if (mapData.getMap(posX+dx, posY+dy) == MapData.TYPE_WALL){
       return false;
     } else{
       return true;
     }
   }
-
-  public boolean canEarnItem(int dx, int dy){   //指定した座標がアイテムか判定する
+  /**
+  *@param dx,dyは移動する量
+  *@return 座標がアイテムであった場合に正を返し、そうでなければ負を返す
+  */
+  public boolean canEarnItem(int dx, int dy){  
     if (mapData.getMap(posX+dx, posY+dy) == MapData.TYPE_ITEM){
       return true;
     } else{
       return false;
     }
   }
-
-  public boolean goal(){                                  //ゴール判定
-    if (mapData.getMap(posX, posY) == MapData.TYPE_GOAL){   //boolean型には真か偽のどちらかが入る
-      return true;     //真の値
+  /**
+  *@param なし
+  *@return 座標がゴールであった場合に正を返す、そうでなければ負を返す
+  */
+  public boolean goal(){
+    if (mapData.getMap(posX, posY) == MapData.TYPE_GOAL){
+      return true;
     }else{
-      return false;   //偽の値
+      return false;
     }
   }
-
+  /**
+  *@param dx,dyは移動する量
+  *@return 動ける場合に正を、動けない場合に負を返す
+  */
   public boolean move(int dx, int dy){
     if (canMove(dx,dy)){
-      if(canEarnItem(dx,dy)){ //移動先がアイテムのとき回収する
+      if(canEarnItem(dx,dy)){
         mapData.earnItem(posX+dx,posY+dy);
       }
       posX += dx;
@@ -115,7 +142,10 @@ public class MoveChara {
       return false;
     }
   }
-
+  /**
+  *@param なし
+  *@return 猫の移動方向によって、画像を取得します
+  */
   public ImageView getCharaImageView(){
     return charaImageViews[charaDir];
   }
