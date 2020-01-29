@@ -32,4 +32,5 @@ public class MapData3 extends MapData {
   @Override
   public void fillBlack(){}
 
+
 }
