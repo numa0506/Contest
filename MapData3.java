@@ -14,13 +14,11 @@ public class MapData3 extends MapData {
   }
 
   public void putFire(){
-    for(int i=0;i<=10;i++){
-      while(true){
-        int x = (int)(Math.random()*width);
-        int y = (int)(Math.random()*height);
-        if(getMap(x,y)==TYPE_WALL ){ //ランダムに求めた座標が壁だったら炎を表示する
-          setMap(x,y,TYPE_FIRE);
-          break;
+
+    for(int y=0;y<height;y++){
+      for(int x=0;x<width;x++){
+        if(getMap(x,y)==TYPE_WALL){
+          maps[y][x]=TYPE_FIRE;
         }
       }
     }

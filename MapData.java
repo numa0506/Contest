@@ -82,12 +82,7 @@ public abstract class MapData {
   }
 
   public void putGoal(){      //ゴールの配置
-    if(getMap(19,13) ==TYPE_NONE){    //空白マスだったらゴールを配置
       setMap(19,13,TYPE_GOAL);
-    }else{
-      System.err.println("ゴール予定座標に空白マスがありません。");
-      System.exit(1);//プログラムを終了する
-    }
   }
 
   public int getHeight(){
