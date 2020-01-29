@@ -80,7 +80,7 @@ public class MapGameController implements Initializable {
             }
         }
     }
-
+    /**
     public void resetMapIfGoal(){//Restart MapGame if catch GOAL
         if(chara.goal()){
             mapData = new MapData(21,15);
@@ -96,8 +96,9 @@ public class MapGameController implements Initializable {
             mapPrint(chara, mapData);
         }
     }
-
+    **/
     public void removeBlack(int cx,int cy,MapData m){
+        m.fillBlack();
         for(int dy=-1;dy<=1;dy++){
             for(int dx=-1;dx<=1;dx++){
                 try{

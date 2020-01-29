@@ -16,7 +16,7 @@ import java.net.MalformedURLException;
 public class MapGame extends Application {
   public static Stage stage;
   public static MapGame startInst;
-  private static int stageCounter = 0;
+  public static int stageCounter = 0;
 
   @Override
   public void start(Stage primaryStage) throws Exception {

@@ -1,7 +1,7 @@
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class MapData {
+public abstract class MapData {
   public static final int NUMBER = 3;   //アイテムの数を定数で保存
   public static final int TYPE_NONE   = 0;
   public static final int TYPE_WALL   = 1;
@@ -20,7 +20,7 @@ public class MapData {
   public Image[] mapImages;
   public ImageView[][] mapImageViews;
   public int[][] maps;
-  public  boolean[][] blackOut;//黒塗り判定用配列
+  public boolean[][] blackOut;//黒塗り判定用配列
   public int width;
   public int height;
   public int [][] itemList = new int[NUMBER][2];  //アイテムの座標をx軸y軸に分けて保存する配列
@@ -124,7 +124,8 @@ public class MapData {
     }
   }
 
-  public void setBlackOut(int x,int y){}//うまくできたら最終的にはabstractに
+  public abstract void setBlackOut(int x,int y);//うまくできたら最終的にはabstractに:
+  public abstract void fillBlack();
 
 
   public void fillMap(int type){

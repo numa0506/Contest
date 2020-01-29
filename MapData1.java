@@ -38,5 +38,8 @@ public class MapData1 extends MapData {
     blackOut[y][x]=true;
   }
 
+  @Override
+  public void fillBlack(){}
+
 
 }

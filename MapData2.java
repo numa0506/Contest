@@ -34,7 +34,16 @@ public class MapData2 extends MapData {
   }
 
   @Override
-  public void setBlackOut(int x,int y){}
+  public void setBlackOut(int x,int y){
+      blackOut[y][x]=true;
+  }
+  public void fillBlack(){
+    for (int y=0; y<height; y++) {
+      for (int x=0; x<width; x++) {
+        blackOut[y][x]=false;
+      }
+    }
+  }
 
 
 }

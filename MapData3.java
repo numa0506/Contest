@@ -29,6 +29,7 @@ public class MapData3 extends MapData {
 
   @Override
   public void setBlackOut(int x,int y){}
-
+  @Override
+  public void fillBlack(){}
 
 }
