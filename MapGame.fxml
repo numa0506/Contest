@@ -22,7 +22,7 @@
           <Button text="↓" GridPane.rowIndex="2" GridPane.columnIndex="1" onAction="#downButtonAction" />
 
         </GridPane>
-        <Button text="func1" prefWidth="100" onAction="#func1ButtonAction"/>
+        <Button text="pause" prefWidth="100" onAction="#func1ButtonAction"/>
         <Button text="func2" prefWidth="100" onAction="#func2ButtonAction"/>
         <Button text="func3" prefWidth="100" onAction="#func3ButtonAction"/>
         <Button text="func4" prefWidth="100" onAction="#func4ButtonAction"/>

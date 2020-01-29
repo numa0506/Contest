@@ -24,7 +24,8 @@ public class MapData {
   public int width;
   public int height;
   public int [][] itemList = new int[NUMBER][2];  //アイテムの座標をx軸y軸に分けて保存する配列
-  public boolean[] itemFlag  = new boolean[NUMBER]; //アイテムの回収の有無を保存する配列
+  public static boolean[] itemFlag  = new boolean[NUMBER]; //アイテムの回収の有無を保存する配列
+  public static MapData MapDataInst;
 
   MapData(int x, int y){
     mapImages     = new Image[10];//適当な値です
@@ -43,7 +44,8 @@ public class MapData {
     putGoal();
     setImageViews();
   }
-  public boolean getItemFlag(int i){
+
+  public static boolean getItemFlag(int i){
     return itemFlag[i];
   }
   public void earnItem(int x,int y){ //アイテムを回収する
@@ -70,6 +72,9 @@ public class MapData {
           setMap(x,y,TYPE_ITEM);
           itemList[i][0]=x;
           itemList[i][1]=y;
+          itemFlag[0] = false;
+          itemFlag[1] = false;
+          itemFlag[2] = false;
           break;
         }
       }
@@ -164,5 +169,19 @@ public class MapData {
       }
       System.out.print("\n");
     }
+  }
+
+  public static int itemCount(){
+    int count = 0;
+    for(int i = 0;i<3;i++){
+      if(getItemFlag(i)==true){
+        count++;
+      }
+    }
+    return count;
+  }
+
+  public static MapData getInstance(){
+    return MapDataInst;
   }
 }

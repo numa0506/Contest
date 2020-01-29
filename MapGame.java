@@ -7,45 +7,62 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
+import javafx.event.ActionEvent;
 import java.io.File;
 import javafx.scene.media.AudioClip;
 import java.net.MalformedURLException;
 
 
 public class MapGame extends Application {
-  public static Stage stage;
-  public static MapGame startIns;
-  public static Scene title;
+  public static Stage stage;
+  public static MapGame startInst;
+  private static int stageCounter = 0;
 
   @Override
   public void start(Stage primaryStage) throws Exception {
     try{
       stage = primaryStage;
-      startIns = this;
-      primaryStage.setTitle("MAP GAME");
+      startInst = this;
+      stage.setTitle("MAP GAME");
       Pane myPane_top = (Pane)FXMLLoader.load(getClass().getResource("Title.fxml"));
-      title = new Scene(myPane_top);
-      primaryStage.setScene(title);
-      primaryStage.show();
+      Scene title = new Scene(myPane_top);
+      stage.setScene(title);
+
+      Stage subStage = new Stage();
+      Button subStageButton = new Button("NEXT");
+      Label subStageLabel = new Label("時代はドッグ帝国との戦時下。あなたは帝国の機密文書を入手することに成功した！\nしかし、逃走する際に見つかってしまう。一刻も早く自国に文書を持ち帰ろう！");
+      BorderPane myPane_sub = new BorderPane(subStageLabel);
+      myPane_sub.setCenter(subStageLabel);
+      myPane_sub.setBottom(subStageButton);
+      Scene subScene = new Scene(myPane_sub, 320, 240);
+      subStage.setWidth(640);
+      subStage.setHeight(300);
+      subStage.setTitle("MAP GAME2");
+      subStage.setScene(subScene);
+
+      subStageButton.setOnAction((ActionEvent) -> {
+          subStageButton.getScene().getWindow().hide();
+      });
+
+      stage.show();
+      subStage.show();
     }catch(Exception e){
       e.printStackTrace();
-    }
-
-
+    }
   }
   public void startGame() throws Exception{//なんのメソッドなのかわからないけど流用させてもらいます　長沼
-    //Scene game = setScene("MapGame.fxml");
+    stageCounter++;
     Scene game = new Scene((Pane)FXMLLoader.load(getClass().getResource("MapGame.fxml")));
     stage.setScene(game);
   }
 
-  public void resultShow(){
+  public void showResult(){
     Scene result = setScene("result.fxml");
     stage.setScene(result);
   }
 
   public static MapGame getInstance(){
-    return startIns;
+    return startInst;
   }
 
   private Scene setScene(String fxmlName){

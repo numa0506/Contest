@@ -2,9 +2,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 import javafx.animation.AnimationTimer;
+
 /**
-*@author Wada,Naganuma*2,Pham,Terada,Seta
-*@version 1.0
+*@author GROUP1
+*@version 2.0
 */
 public class MoveChara {
   public static final int TYPE_DOWN  = 0;
@@ -17,7 +18,7 @@ public class MoveChara {
   private final String pngPathBefore = "png/neko";
   private final String pngPathAfter  = ".png";
 
-  private int posX;
+  private int posX; //キャラクターの現在のx座標
   private int posY;
 
   private MapData mapData;
@@ -51,9 +52,9 @@ public class MoveChara {
 
     setCharaDir(TYPE_DOWN);
   }
+
   /**
-  *@param なし
-  *@return なし
+  *使ってません
   */
   public void changeCount(){
     count = count + diffx;
@@ -65,23 +66,24 @@ public class MoveChara {
       diffx = 1;
     }
   }
+
   /**
-  *@param getPosXは今いる現在座標
-  *@return 現在のx座標を返します
+  *@return 現在のx座標の値
   */
   public int getPosX(){
     return posX;
   }
+
   /**
-  *@param getPosYは今いる現在座標
-  *@return 現在のy座標を返します
+  *@return 現在のy座標の値
   */
   public int getPosY(){
     return posY;
   }
+
   /**
-  *@param cdは移動しているか、止まっているかの判定に使用される
-  *@return 4方向のいずれかになったらそのアニメを返す、止まっている場合は止まっているアニメを返す
+  *引数が指定する向きの、キャラクターのアニメーションを再生する。
+  *@param cd キャラクターの向き
   */
   public void setCharaDir(int cd){
     charaDir = cd;
@@ -93,11 +95,14 @@ public class MoveChara {
       }
     }
   }
+
   /**
-  *@param dx,dyは移動する量
-  *@return 座標+移動量が壁であったら正を返す、そうでなければ負を返す
+  *移動可能なマスかを判定する。
+  *@param dx x軸方向の移動距離
+  *@param dy y軸方向の移動距離
+  *@return 移動先の座標を調べ、移動可能ならばtrueを、そうでなければfalseを返す。
   */
-  public boolean canMove(int dx, int dy){
+  public boolean canMove(int dx, int dy){     //壁じゃなかったら正を返すように修正
     if (mapData.getMap(posX+dx, posY+dy) == MapData.TYPE_WALL){
       return false;
     } else if(mapData.getMap(posX+dx, posY+dy) == 5){
@@ -109,35 +114,42 @@ public class MoveChara {
       return true;
     }
   }
+
   /**
-  *@param dx,dyは移動する量
-  *@return 座標がアイテムであった場合に正を返し、そうでなければ負を返す
+  *移動先の座標のアイテムの有無を確認する。
+  *@param dx x軸方向の移動距離
+  *@param dy y軸方向の移動距離
+  *@return 指定した座標にアイテムがあればtrueを、無ければfalseを返す。
   */
-  public boolean canEarnItem(int dx, int dy){  
+  public boolean canEarnItem(int dx, int dy){   //指定した座標がアイテムか判定する
     if (mapData.getMap(posX+dx, posY+dy) == MapData.TYPE_ITEM){
       return true;
     } else{
       return false;
     }
   }
+
   /**
-  *@param なし
-  *@return 座標がゴールであった場合に正を返す、そうでなければ負を返す
+  *移動先の座標がゴールかどうかを確認する。
+  *@return 指定した座標がゴールのマスならばtrueを、そうでなければfalseを返す。
   */
-  public boolean goal(){
-    if (mapData.getMap(posX, posY) == MapData.TYPE_GOAL){
-      return true;
+  public boolean goal(){                                  //ゴール判定
+    if (mapData.getMap(posX, posY) == MapData.TYPE_GOAL){   //boolean型には真か偽のどちらかが入る
+      return true;     //真の値
     }else{
-      return false;
+      return false;   //偽の値
     }
   }
+
   /**
-  *@param dx,dyは移動する量
-  *@return 動ける場合に正を、動けない場合に負を返す
+  *キーなどの入力を受けて、キャラクターの座標を移動させる。
+  *@param dx x軸方向の移動距離
+  *@param dy y軸方向の移動距離
+  *@return 移動出来たらtrueを、そうでなければfalseを返す。
   */
   public boolean move(int dx, int dy){
     if (canMove(dx,dy)){
-      if(canEarnItem(dx,dy)){
+      if(canEarnItem(dx,dy)){ //移動先がアイテムのとき回収する
         mapData.earnItem(posX+dx,posY+dy);
       }
       posX += dx;
@@ -147,9 +159,9 @@ public class MoveChara {
       return false;
     }
   }
+
   /**
-  *@param なし
-  *@return 猫の移動方向によって、画像を取得します
+  *たぶん使ってません
   */
   public ImageView getCharaImageView(){
     return charaImageViews[charaDir];

@@ -10,7 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.fxml.FXML;
 
 public class TimerController implements Initializable{
-    public static TimerController timerInst; //これは使わなければ消す
+    public static TimerController timerInst;
     private int h;
     private int m;
     private int s;
@@ -29,7 +29,7 @@ public class TimerController implements Initializable{
                 ms += 1;
             }else{
                 ms = 0;
-                msecTimer.stop();
+                msecTimer.stop(); //メモリリークが怖いので、規定回数ごとに再生ヘッドを初期位置にリセットしています
                 msecTimer.play();
             }
             msecLabel.setText(castToString(ms));
@@ -58,19 +58,22 @@ public class TimerController implements Initializable{
         public void handle(ActionEvent event) {
             if(m < 59){
                 m += 1;
-                minLabel.setText(castToString(m));
             }else{
                 m = 0;
                 h += 1;
                 minTimer.stop();
                 minTimer.play();
-                minLabel.setText("" + h + " : " + castToString(m));
             }
+            if(h == 0){
+                minLabel.setText(castToString(m));
+            }else{
+                minLabel.setText("" + castToString(h) + " : " + castToString(m));
+            }
         }
     }));
 
     public void initialize(URL url, ResourceBundle rb){
-        initTimer();
+        initTimer(); //もしもinitializeなしでタイマーを初期化したくなったときのために切り分けてあります
         startTimer();
     }
 
@@ -113,7 +116,7 @@ public class TimerController implements Initializable{
         if(h == 0){
             return castToString(m) + " : " + castToString(s) + " : " + castToString(ms);
         }else{
-            return "" + h + castToString(m) + " : " + castToString(s) + " : " + castToString(ms);
+            return castToString(h) + " : " +castToString(m) + " : " + castToString(s) + " : " + castToString(ms);
         }
     }
 
