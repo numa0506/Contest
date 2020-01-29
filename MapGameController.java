@@ -30,13 +30,14 @@ public class MapGameController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        if ( MapGame.stageCounter== 1){
+        int stageIndex = MapGame.getStageCounter();
+        if (stageIndex == 1){
             mapData = new MapData1(21,15);
         }
-        else if(MapGame.stageCounter == 2){
+        else if(stageIndex == 2){
             mapData = new MapData2(21,15);
         }
-        else if(MapGame.stageCounter == 3){
+        else if(stageIndex == 3){
             mapData = new MapData3(21,15);
         }
         else {
@@ -80,25 +81,8 @@ public class MapGameController implements Initializable {
             }
         }
     }
-    /**
-    public void resetMapIfGoal(){//Restart MapGame if catch GOAL
-        if(chara.goal()){
-            mapData = new MapData(21,15);
-            chara = new MoveChara(1,1,mapData);
-            //           mapGroups = new Group[mapData.getHeight()*mapData.getWidth()];
-            mapImageViews = new ImageView[mapData.getHeight()*mapData.getWidth()];
-            for(int y=0; y<mapData.getHeight(); y++){
-                for(int x=0; x<mapData.getWidth(); x++){
-                    int index = y*mapData.getWidth() + x;
-                    mapImageViews[index] = mapData.getImageView(x,y);
-                }
-            }
-            mapPrint(chara, mapData);
-        }
-    }
-    **/
+
     public void removeBlack(int cx,int cy,MapData m){
-        m.fillBlack();
         for(int dy=-1;dy<=1;dy++){
             for(int dx=-1;dx<=1;dx++){
                 try{
@@ -205,6 +189,7 @@ public class MapGameController implements Initializable {
         info.setTitle(title);
         info.setHeaderText(null);
         info.setContentText(message);
+        info.setX(500);
         info.showAndWait();
     }
 }
