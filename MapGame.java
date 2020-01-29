@@ -64,6 +64,9 @@ public class MapGame extends Application {
   public static MapGame getInstance(){
     return startInst;
   }
+  public static int getStageCounter(){
+    return stageCounter;
+  }
 
   private Scene setScene(String fxmlName){
     try{

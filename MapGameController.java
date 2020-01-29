@@ -83,6 +83,7 @@ public class MapGameController implements Initializable {
     }
 
     public void removeBlack(int cx,int cy,MapData m){
+      m.fillBlack();
         for(int dy=-1;dy<=1;dy++){
             for(int dx=-1;dx<=1;dx++){
                 try{

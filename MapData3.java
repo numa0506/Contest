@@ -12,6 +12,17 @@ public class MapData3 extends MapData {
     putFire();
     setImageViews();
   }
+  @Override
+  public void setMapImageFiles(){
+    mapImageFiles[0] =   "png/space3/SPACE3.jpg";
+    mapImageFiles[1] =   "png/space3/WALL3.jpg";
+    mapImageFiles[2] =   "png/space3/ITEM1.jpg";   //　追加
+    mapImageFiles[3] =   "png/space3/goal1.jpg";
+    mapImageFiles[4] =   "png/black.png";//黒塗り画像
+    mapImageFiles[5] =   "png/space3/WALL3.jpg";
+
+  }
+
 
   public void putFire(){
 

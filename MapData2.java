@@ -15,6 +15,17 @@ public class MapData2 extends MapData {
     blackOut[13][19]=true;
     setImageViews();
   }
+  @Override
+  public void setMapImageFiles(){
+    mapImageFiles[0] =   "png/space2/SPACE2.jpg";
+    mapImageFiles[1] =   "png/space2/WALL2.jpg";
+    mapImageFiles[2] =   "png/space2/ITEM2.jpg";   //　追加
+    mapImageFiles[3] =   "png/space2/goal2.jpg";
+    mapImageFiles[4] =   "png/space2/YUKI.jpg";//黒塗り画像
+    mapImageFiles[5] =   "png/FIRE.png";
+
+  }
+
 
   @Override
   public void setImageViews() {

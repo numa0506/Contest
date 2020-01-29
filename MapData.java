@@ -8,14 +8,7 @@ public abstract class MapData {
   public static final int TYPE_ITEM = 2;
   public static final int TYPE_GOAL = 3;
   //public static final int TYPE_BLACK = 4;
-  public static final String mapImageFiles[] = {
-    "png/SPACE.png",
-    "png/WALL.png",
-    "png/ITEM.png",   //　追加
-    "png/GOAL.png",
-    "png/black.png",//黒塗り画像
-    "png/FIRE.png",
-  };
+  public static String mapImageFiles[]= new String[6];
 
   public Image[] mapImages;
   public ImageView[][] mapImageViews;
@@ -28,6 +21,7 @@ public abstract class MapData {
   public static MapData MapDataInst;
 
   MapData(int x, int y){
+    setMapImageFiles();
     mapImages     = new Image[10];//適当な値です
     mapImageViews = new ImageView[y][x];
     for (int i=0; i<4; i++) {
@@ -43,6 +37,14 @@ public abstract class MapData {
     putItem();   //追加
     putGoal();
     setImageViews();
+  }
+  public void setMapImageFiles(){
+    mapImageFiles[0] =   "png/SPACE.png";
+    mapImageFiles[1] =   "png/WALL.jpg";
+    mapImageFiles[2] =   "png/ITEM.png";   //　追加
+    mapImageFiles[3] =   "png/GOAL.png";
+    mapImageFiles[4] =   "png/black.png";//黒塗り画像
+    mapImageFiles[5] =   "png/FIRE.png";
   }
 
   public static boolean getItemFlag(int i){

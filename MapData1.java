@@ -17,6 +17,18 @@ public class MapData1 extends MapData {
   }
 
   @Override
+  public void setMapImageFiles(){
+    mapImageFiles[0] =   "png/space1/SPACE1.jpg";
+    mapImageFiles[1] =   "png/space1/WALL1.jpg";
+    mapImageFiles[2] =   "png/space1/ITEM1.jpg";   //　追加
+    mapImageFiles[3] =   "png/space1/goal1.jpg";
+    mapImageFiles[4] =   "png/black.png";//黒塗り画像
+    mapImageFiles[5] =   "png/FIRE.png";
+
+  }
+
+
+  @Override
   public void setImageViews() {
       for (int y=0; y<height; y++) {
         for (int x=0; x<width; x++) {
