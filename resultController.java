@@ -16,7 +16,11 @@ public class resultController extends Application {
 
 
     public void startbtn(ActionEvent event){
+      try{
         MapGame.getInstance().startGame();
+      }catch(Exception e){
+
+      }
     }
 
     @Override
