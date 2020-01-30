@@ -47,7 +47,7 @@ public class MapGame extends Application {
     stage.setScene(game);
   }
 
-  public void setStory(){
+  public void setStory()throws Exception{
       Pane myPane_sub = (Pane)FXMLLoader.load(getClass() .getResource("Story" + storyIndex + ".fxml"));
       subScene = new Scene(myPane_sub, 320, 240);
       subStage.setWidth(640);
