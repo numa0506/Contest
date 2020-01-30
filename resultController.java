@@ -42,6 +42,9 @@ public class ResultController implements Initializable {
     try{
 
       MapGame.getInstance().startGame();
+      MapGame.getInstance().setStory();
+      MapGame.getInstance().subStage.show();
+      TimerController.getInstance().stopTimer();
 
     }catch(Exception e){e.printStackTrace();}
 

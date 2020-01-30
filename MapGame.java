@@ -15,8 +15,12 @@ import java.net.MalformedURLException;
 
 public class MapGame extends Application {
   public static Stage stage;
+  public static Stage subStage;
   public static MapGame startInst;
-  public static int stageCounter = 0;
+  public static Scene scene;
+  public static Scene subScene;
+  private int stageCounter = 1;
+  private int storyIndex = 0;
 
   @Override
   public void start(Stage primaryStage) throws Exception {
@@ -25,24 +29,11 @@ public class MapGame extends Application {
       startInst = this;
       stage.setTitle("MAP GAME");
       Pane myPane_top = (Pane)FXMLLoader.load(getClass().getResource("Title.fxml"));
-      Scene title = new Scene(myPane_top);
-      stage.setScene(title);
+      scene = new Scene(myPane_top);
+      stage.setScene(scene);
 
-      Stage subStage = new Stage();
-      Button subStageButton = new Button("NEXT");
-      Label subStageLabel = new Label("時代はドッグ帝国との戦時下。あなたは帝国の機密文書を入手することに成功した！\nしかし、逃走する際に見つかってしまう。一刻も早く自国に文書を持ち帰ろう！");
-      BorderPane myPane_sub = new BorderPane(subStageLabel);
-      myPane_sub.setCenter(subStageLabel);
-      myPane_sub.setBottom(subStageButton);
-      Scene subScene = new Scene(myPane_sub, 320, 240);
-      subStage.setWidth(640);
-      subStage.setHeight(300);
-      subStage.setTitle("MAP GAME2");
-      subStage.setScene(subScene);
-
-      subStageButton.setOnAction((ActionEvent) -> {
-          subStageButton.getScene().getWindow().hide();
-      });
+      subStage = new Stage();
+      setStory();
 
       stage.show();
       subStage.show();
@@ -51,21 +42,32 @@ public class MapGame extends Application {
     }
   }
   public void startGame() throws Exception{//なんのメソッドなのかわからないけど流用させてもらいます　長沼
-    stageCounter++;
+    //Scene game = setScene("MapGame.fxml");
     Scene game = new Scene((Pane)FXMLLoader.load(getClass().getResource("MapGame.fxml")));
     stage.setScene(game);
   }
+
+  public void setStory(){
+      Pane myPane_sub = (Pane)FXMLLoader.load(getClass() .getResource("Story" + storyIndex + ".fxml"));
+      subScene = new Scene(myPane_sub, 320, 240);
+      subStage.setWidth(640);
+      subStage.setHeight(300);
+      subStage.setTitle("" + (storyIndex - 1));
+      subStage.setScene(subScene);
+      storyIndex++;
+  }
 
   public void showResult(){
-    Scene result = setScene("result.fxml");
+    Scene result = setScene("Result.fxml");
     stage.setScene(result);
   }
 
   public static MapGame getInstance(){
     return startInst;
   }
-  public static int getStageCounter(){
-    return stageCounter;
+
+  public int getStageCounter(){
+      return stageCounter;
   }
 
   private Scene setScene(String fxmlName){
@@ -78,7 +80,7 @@ public class MapGame extends Application {
     }
     return null;
   }
-
+
   public static void main(String[] args)throws Exception{
     AudioClip bgm = new AudioClip(new File("sound/loop3.wav").toURI().toString());
     bgm.setCycleCount(AudioClip.INDEFINITE);

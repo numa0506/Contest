@@ -30,7 +30,7 @@ public class MapGameController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        int stageIndex = MapGame.getStageCounter();
+        int stageIndex = MapGame.getInstance().getStageCounter();
         if (stageIndex == 1){
             mapData = new MapData1(21,15);
         }
@@ -83,7 +83,7 @@ public class MapGameController implements Initializable {
     }
 
     public void removeBlack(int cx,int cy,MapData m){
-      m.fillBlack();
+        m.fillBlack();
         for(int dy=-1;dy<=1;dy++){
             for(int dx=-1;dx<=1;dx++){
                 try{
