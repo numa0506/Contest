@@ -58,7 +58,7 @@ public class MapGame extends Application {
   }
 
   public void showResult(){
-    Scene result = setScene("Result.fxml");
+    Scene result = setScene("result.fxml");
     stage.setScene(result);
   }
 
