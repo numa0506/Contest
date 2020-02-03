@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+
+<HBox xmlns:fx="http://javafx.com/fxml/" xmlns="http://javafx.com/javafx/" fx:controller="TimerController">
+  <padding>
+    <Insets bottom="10" left="10" right="10" top="10" />
+  </padding>
+  <children>
+    <Label fx:id="minLabel" prefWidth="20" />
+    <Label prefWidth="20" text=" : " />
+    <Label fx:id="secLabel" prefWidth="20" />
+    <Label prefWidth="20" text=" : " />
+    <Label fx:id="msecLabel" prefWidth="20" />
+  </children>
+</HBox>
