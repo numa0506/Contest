@@ -14,16 +14,27 @@ import javafx.fxml.Initializable;
 import java.util.ResourceBundle;
 import java.net.URL;
 
-
+/**
+*@author Group1
+*/
 public class SubTitleController implements Initializable {
-  @Override
-  public void initialize(URL url, ResourceBundle rb) {
-  }
-  public void epilogue(){//エピローグ用のボタン
 
-  }
-  public void description(){//ステージ前の説明用
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+    }
 
-  }
+    /**
+    *プロローグ画面を閉じる。
+    */
+    public void closePrologue(){
+        MapGame.getInstance().subStage.close();
+    }
 
+    /**
+    *ストーリー画面を閉じ、タイマーを動かす。
+    */
+    public void closeDescription(){
+        MapGame.getInstance().subStage.close();
+        TimerController.getInstance().startTimer();
+    }
 }

@@ -18,16 +18,21 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
 
+/**
+*@author Group1
+*/
 public class MapGameController implements Initializable {
     public MapData mapData;
     public MoveChara chara;
     public GridPane mapGrid;
     public ImageView[] mapImageViews;
-    public ButtonType button_Yes = new ButtonType("Yes", ButtonData.YES);
-    public ButtonType button_No = new ButtonType("No", ButtonData.NO);
-    //    public Group[] mapGroups;
 
-
+    /**
+    *コントローラを初期化する。
+    *適切なマップデータを選択し、ゲーム画面を設定する。
+    *@param url ルートオブジェクトの相対パスの解決に使用される場所
+    *@param rb ルートオブジェクトのローカライズに使用されるリソース
+    */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         int stageIndex = MapGame.getInstance().getStageCounter();
@@ -44,7 +49,6 @@ public class MapGameController implements Initializable {
             System.exit(0);
         }
         chara = new MoveChara(1,1,mapData);
-        //        mapGroups = new Group[mapData.getHeight()*mapData.getWidth()];
         mapImageViews = new ImageView[mapData.getHeight()*mapData.getWidth()];
         for(int y=0; y<mapData.getHeight(); y++){
             for(int x=0; x<mapData.getWidth(); x++){
@@ -55,6 +59,9 @@ public class MapGameController implements Initializable {
         mapPrint(chara, mapData);
     }
 
+    /**
+    *配列mapImageViews[]の参照先を設定する。
+    */
     public void imageRestore(){
         for(int y = 0; y < mapData.getHeight(); y++){
             for(int x = 0; x < mapData.getWidth(); x++){
@@ -64,6 +71,11 @@ public class MapGameController implements Initializable {
         }
     }
 
+    /**
+    *マップとキャラクターを表示する。
+    *@param c キャラクター
+    *@param m マップデータ
+    */
     public void mapPrint(MoveChara c, MapData m){
         int cx = c.getPosX();
         int cy = c.getPosY();
@@ -82,6 +94,12 @@ public class MapGameController implements Initializable {
         }
     }
 
+    /**
+    *引数で指定された座標以外を黒塗りする。
+    *@param cx x座標
+    *@param cy y座標
+    *@param m マップデータ
+    */
     public void removeBlack(int cx,int cy,MapData m){
         m.fillBlack();
         for(int dy=-1;dy<=1;dy++){
@@ -96,6 +114,9 @@ public class MapGameController implements Initializable {
         m.setImageViews();
     }
 
+    /**
+    *キャラクターの現在の座標がゴールの座標と一致していればリザルト画面に遷移する。
+    */
     public void judgeAndGoal(){
         if(chara.getPosX() == 19 && chara.getPosY() == 13){
             MapGame.getInstance().showResult();
@@ -104,6 +125,10 @@ public class MapGameController implements Initializable {
         }
     }
 
+    /**
+    *タイマーを止め、ダイアログウィンドウを表示する。
+    *@param event 入力
+    */
     public void func1ButtonAction(ActionEvent event) {
         TimerController.getInstance().stopTimer();
         showInfo("press \"OK\" to restart", "PAUSE");
@@ -113,6 +138,9 @@ public class MapGameController implements Initializable {
     public void func3ButtonAction(ActionEvent event) { }
     public void func4ButtonAction(ActionEvent event) { }
 
+    /**
+    *キーボードからの入力を受け付ける。
+    */
     public void keyAction(KeyEvent event){
         KeyCode key = event.getCode();
         if (key == KeyCode.DOWN){
@@ -126,10 +154,18 @@ public class MapGameController implements Initializable {
         }
     }
 
+    /**
+    *プレイヤーの移動や方向転換の様子をコンソールに出力する。
+    *@param actionString
+    */
     public void outputAction(String actionString) {
         System.out.println("Select Action: " + actionString);
     }
 
+    /**
+    *移動したことをコンソールに表示し、キャラの向きと座標を設定。マップの表示を更新し、ゴールしたかどうかを判定する。
+    *以下、他の方向についても同様の内容。
+    */
     public void downButtonAction(){
         outputAction("DOWN");
         chara.setCharaDir(MoveChara.TYPE_DOWN);
@@ -137,6 +173,10 @@ public class MapGameController implements Initializable {
         mapPrint(chara, mapData);
         judgeAndGoal();
     }
+
+    /**
+    *ボタンのクリックではなく、キーの押下で操作されたときのためのメソッド。
+    */
     public void downButtonAction(ActionEvent event) {
         downButtonAction();
     }
@@ -174,17 +214,11 @@ public class MapGameController implements Initializable {
         upButtonAction();
     }
 
-    public boolean isYes(String question, String title){
-        Alert dialog = new Alert(AlertType.NONE, question, button_Yes, button_No);
-        dialog.setTitle(title);
-        Optional<ButtonType> result = dialog.showAndWait();
-        if (result.isPresent() && result.get() == button_Yes){
-            return true;
-        }else{
-            return false;
-        }
-    }
-
+    /**
+    *引数に従ってダイアログボックスを表示する。
+    *@param message 表示するメッセージ
+    *@param title ウィンドウのタイトル
+    */
     public void showInfo(String message, String title){
         Alert info = new Alert(AlertType.INFORMATION);
         info.setTitle(title);

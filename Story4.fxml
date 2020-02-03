@@ -6,7 +6,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane fx:id="SubTitleController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane fx:controller="SubTitleController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label layoutX="257.0" layoutY="47.0" text="〜ステージ3〜" />
       <Label layoutX="220.0" layoutY="131.0" text="とうとうあいつら、森に火を付けやがった！！！" />
@@ -17,6 +17,6 @@
             <Image url="@png/nekod2.png" />
          </image>
       </ImageView>
-      <Button layoutX="455.0" layoutY="305.0" mnemonicParsing="false" onAction="#description" prefHeight="62.0" prefWidth="102.0" text="Start" />
+      <Button layoutX="455.0" layoutY="305.0" mnemonicParsing="false" onAction="#closeDescription" prefHeight="62.0" prefWidth="102.0" text="Start" />
    </children>
 </Pane>
